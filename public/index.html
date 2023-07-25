@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Webflow intergration</title>
+    <style>
+        canvas {
+            display: block;
+            position: absolute;
+            outline:0;
+        }
+
+        * {
+            /* disable on touch highlights of html elements, especially on mobile! */
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position:absolute;
+            z-index:9999;
+            overflow:auto;
+            top:0;
+            width:100%;
+            height:100%;
+        }
+
+
+        .title {
+            font-size: 2em;
+            color: navy;
+        }
+
+        .subtitle {
+            font-size: 1.5em;
+            color: pink;
+        }
+
+        .paragraph {
+            color: gray;
+            line-height: 1.5;
+        }
+
+        .list {
+            list-style-type: circle;
+            padding-left: 20px;
+        }
+
+        .list-item {
+            color: teal;
+        }
+
+        .button {
+            background-color: lightblue;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        .form {
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+    </style>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
+    <meta itemprop="name" content="Webflow intergration">
+    <meta itemprop="description" content="made with cables">
+    <meta itemprop="image" content="screenshot.png">
+    <meta name="description" content="made with cables" />
+
+    
+
+</head>
+
+<body>
+    <div class="container">    
+        <section>
+            <p class="wcables paragraph">Vestibulum vel nisi at sem condimentum lacinia.</p>
+            <ul class="wcables list">
+                <li class="wcables list-item">Item 1</li>
+                <li class="wcables list-item">Item 2</li>
+                <li class="wcables list-item">Item 3</li>
+            </ul>
+            <button class="wcables button">Button 1</button>
+            <button class="wcables button">Button 2</button>
+            <form class="wcables form">
+                <label class="wcables" for="fname">First name:</label><br>
+                <input class="wcables input-field" type="text" id="fname" name="fname"><br>
+                <label class="wcables" for="lname">Last name:</label><br>
+                <input class="wcables input-field" type="text" id="lname" name="lname"><br><br>
+                <input class="wcables button" type="submit" value="Submit">
+            </form>
+            <p class="wcables paragraph">Vestibulum vel nisi at sem condimentum lacinia.</p>
+            <p class="wcables paragraph">Vestibulum vel nisi at sem condimentum lacinia.</p>
+            <p class="wcables paragraph">Vestibulum vel nisi at sem condimentum lacinia.</p>
+            <p class="wcables paragraph">Vestibulum vel nisi at sem condimentum lacinia.</p>
+            <p class="wcables paragraph">Vestibulum vel nisi at sem condimentum lacinia.</p>
+            <p class="wcables paragraph">Vestibulum vel nisi at sem condimentum lacinia.</p>
+            <p class="wcables paragraph">Vestibulum vel nisi at sem condimentum lacinia.</p>
+            <p class="wcables paragraph">Vestibulum vel nisi at sem condimentum lacinia.</p>
+            <p class="wcables paragraph">Vestibulum vel nisi at sem condimentum lacinia.</p>
+            <p class="wcables paragraph">Vestibulum vel nisi at sem condimentum lacinia.</p>
+            <p class="wcables paragraph">Vestibulum vel nisi at sem condimentum lacinia.</p>
+            
+        </section>
+    </div>
+    <canvas id="glcanvas" width="100vw" height="100vh" tabindex="1"></canvas>
+    
+
+    <script type="text/javascript" src="js/patch.js" async></script>
+    <script type="text/javascript">
+        // disable rubberband effect on mobile devices
+        document.getElementById('glcanvas').addEventListener('touchmove', (e)=>{ e.preventDefault(); }, false);
+
+        function patchInitialized(patch) {
+            // You can now access the patch object (patch), register variable watchers and so on
+        }
+
+        function patchFinishedLoading(patch) {
+            // The patch is ready now, all assets have been loaded
+        }
+
+        document.addEventListener('CABLES.jsLoaded', function (event) {
+            CABLES.patch = new CABLES.Patch({
+                patch: CABLES.exportedPatch,
+                "prefixAssetPath": "",
+                "assetPath": "assets/",
+                "jsPath": "js/",
+                "glCanvasId": "glcanvas",
+                "glCanvasResizeToWindow": true,
+                "onPatchLoaded": patchInitialized,
+                "onFinishedLoading": patchFinishedLoading,
+                "canvas":{"alpha":true,"premultipliedAlpha":true} // make canvas transparent
+            });
+        });
+    </script>
+</body>
+</html>
