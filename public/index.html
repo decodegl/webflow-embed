@@ -131,19 +131,20 @@
     <canvas id="glcanvas" width="100vw" height="100vh" tabindex="1"></canvas>
     
     
-    <script type="text/javascript" src="patch.js" async></script>
-    
-
+    <script type="text/javascript" src="patch.js"></script>
     <script type="text/javascript">
         // disable rubberband effect on mobile devices
         document.getElementById('glcanvas').addEventListener('touchmove', (e)=>{ e.preventDefault(); }, false);
 
         function patchInitialized(patch) {
             // You can now access the patch object (patch), register variable watchers and so on
+            patch.config.bindAll();
+            console.log(patch.config);
         }
 
         function patchFinishedLoading(patch) {
             // The patch is ready now, all assets have been loaded
+
         }
 
         document.addEventListener('CABLES.jsLoaded', function (event) {

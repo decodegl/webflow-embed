@@ -1,3 +1,3 @@
 ## Patch Functions:
 
-* default
+* bindAll
