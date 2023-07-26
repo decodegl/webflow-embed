@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "rollup -c",
+    "build": "cp -R public/* dist",
     "serve-dev": "http-server -p 8000 public",
     "serve-prod": "http-server -p 8080 dist",
-    "pull-cables": "cables --export jjLveC --skip-backups -j patch -d 'public'"
+    "pull-cables": "cables --export jjLveC --skip-backups -j patch -d 'public' -f -c"
   },
   "author": "Kirell Benzi",
   "license": "ISC",
