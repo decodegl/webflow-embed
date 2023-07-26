@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>cables Webflow intergration test</title>
+        <style type="text/css">
+            * {
+                padding: 0px;
+                margin: 0px;
+            }
+
+            html {
+                overflow: hidden;
+            }
+
+            body {
+                position: fixed;
+                width: 100%;
+                height: 100%;
+                background-color: #000;
+                color: #000;
+                font-family: arial;
+            }
+
+            .error {
+                background-color: #222;
+                color: #aaa;
+                text-align: center;
+                margin: 50px;
+                padding: 20px;
+            }
+
+            canvas {
+                position: absolute;
+            }
+
+            #errorEl {
+                display: none;
+                height: 100%;
+                width: 100%;
+                text-align: center;
+            }
+
+            #errorEl h2 {
+                color: #aaa;
+            }
+
+            #canvasiframe {
+                height: 100%;
+                width: 100%;
+                border-width: 0;
+            }
+        </style>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
+        <link rel="apple-touch-icon" sizes="16x16" href="/favicon/favicon-16.png">
+        <link rel="apple-touch-icon" sizes="32x32" href="/favicon/favicon-32.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="/favicon/favicon-60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="/favicon/favicon-72.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="/favicon/favicon-144.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="/favicon/favicon-180.png">
+        <link rel="icon" type="image/png" href="/favicon/favicon-16.png" sizes="16x16">
+        <link rel="icon" type="image/png" href="/favicon/favicon-32.png" sizes="32x32">
+        <link rel="icon" type="image/png" href="/favicon/favicon-96.png" sizes="96x96">
+        <link rel="icon" type="image/png" href="/favicon/favicon-144.png" sizes="144x144">
+        <link rel="icon" type="image/png" href="/favicon/favicon-192.png" sizes="192x192">
+        <meta name="msapplication-TileImage" content="/favicon/favicon-144.png">
+        <meta name="description" content="cables: Webflow intergration test"/>
+        <meta itemprop="name" content="cables: Webflow intergration test">
+        <meta itemprop="description" content="interactive visuals, made from cable salad">
+        <meta itemprop="image" content="https://cables.gl/thumb/l/jjLveC/thumb.webp">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@pandrr">
+        <meta name="twitter:title" content="cables: Webflow intergration test">
+        <meta name="twitter:description" content="interactive visuals, made from cable salad">
+        <meta name="twitter:creator" content="@pandrr">
+        <meta name="twitter:image:src" content="https://cables.gl/thumb/l/jjLveC/thumb.webp">
+        <meta property="og:title" content="cables"/>
+        <meta property="og:type" content="article"/>
+        <meta property="og:image" content="https://cables.gl/thumb/l/jjLveC/thumb.webp"/>
+        <meta property="og:description" content="cables: Webflow intergration test"/>
+        <meta property="og:site_name" content="cables"/>
+        <meta property="fb:admins" content="785694383"/>
+    </head>
+    <body class="no-cookie-warning">
+        <div id="canvascontainer" style="width:100%;height: 100%;overflow: hidden;"></div>
+        <div id="errorEl" class="landing">
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <div class="row">
+                <div class="cute-12-phone center-phone text-center">
+                    <a href="/">
+                        <img src="https://cables.gl/img/cables-logo.svg" alt="Cables Logo" width="50" height="50">
+                    </a>
+                    <br/>
+                    <br/>
+                    <br/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="cute-10-phone cute-1-phone-offset left cute-4-tablet center-tablet ">
+                    <div class="formcontainer">
+                        <center>
+                            <h2 class="errorMessage"></h2>
+                        </center>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript" src="https://sandbox.cables.gl/ui/js/talkerapi.js"></script>
+        <script type="text/javascript" src="https://sandbox.cables.gl/ui/js/libs.core.min.js"></script>
+        <script type="text/javascript" src="https://sandbox.cables.gl/ui/js/cables.min.js"></script>
+        <script type="text/javascript" src="https://sandbox.cables.gl/api/ops/code"></script>
+        <script type="text/javascript" src="https://cables.gl/api/project/64c02080c033c0b9f60fdf53/libs.js"></script>
+        <script type="text/javascript" src="https://cables.gl/api/project/64c02080c033c0b9f60fdf53/projectops.js"></script>
+        
+        <script type="text/javascript" src="https://cables.gl/js/libs.min.js"></script>
+        <!-- <script type="text/javascript" src="https://cables.gl/js/script.min.js"></script> -->
+        <script type="text/javascript">
+            var CABLES = CABLES || {};
+            document.addEventListener("DOMContentLoaded", function(event) {
+                const patchOptions = {
+                    "projectId": '64c02080c033c0b9f60fdf53',
+                    "elementId": 'canvascontainer',
+                    "sandboxUrl": "https://sandbox.cables.gl",
+                    "secret": "",
+                    "locationHash": window.location.hash
+                };
+                CABLES.embedPatch(patchOptions, (error)=>{
+                    console.log("error fetching patch", error);
+                    const errorEl = document.getElementById("errorEl");
+                    const canvasContainer = document.getElementById("canvascontainer");
+                    if (canvasContainer)
+                        canvasContainer.style.display = "none";
+                    if (errorEl) {
+                        errorEl.style.display = "block";
+                        const msg = errorEl.querySelector(".errorMessage");
+                        msg.innerHTML = error.msg;
+                    }
+                }
+                );
+            });
+            // window.addEventListener("message", (event)=>{
+            //     if (event.origin !== "https://sandbox.cables.gl")
+            //         return;
+            //     if (event.data && event.data.type === "hashchange") {
+            //         window.location.hash = event.data.data;
+            //     }
+            // }
+            // , false);
+            // window.addEventListener("hashchange", (event)=>{
+            //     const patchIframe = document.getElementById("canvasiframe");
+            //     if (patchIframe) {
+            //         const srcParts = patchIframe.src.split("#", 2);
+            //         const newUrl = srcParts[0] + window.location.hash;
+            //         patchIframe.contentWindow.location.replace(newUrl);
+            //     }
+            // }
+            // , false);
+        </script>
+    </body>
+</html>

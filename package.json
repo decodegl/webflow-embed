@@ -7,12 +7,13 @@
     "build": "rollup -c",
     "serve-dev": "http-server -p 8000 public",
     "serve-prod": "http-server -p 8080 dist",
-    "pull-cables": "cables --export jjLveC --skip-backups -j patch -d 'public' --combine-js --no-index"
+    "pull-cables": "cables --export jjLveC --skip-backups -j patch -d 'public'"
   },
   "author": "Kirell Benzi",
   "license": "ISC",
   "dependencies": {
-    "@cables/cables": "^0.11.0"
+    "@cables/cables": "^0.11.0",
+    "libs": "^0.1.2"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^25.0.3",
@@ -20,6 +21,8 @@
     "@rollup/plugin-node-resolve": "^15.1.0",
     "@rollup/plugin-terser": "^0.4.3",
     "http-server": "^14.1.1",
+    "netlify-cli": "^15.9.1",
+    "parcel-bundler": "^1.12.5",
     "rollup": "^2.79.1"
   }
 }
